@@ -93,6 +93,8 @@ gap2 = 15   # moving gap
 pygame.init()
 simulation = pygame.sprite.Group()
 
+personSimulation = pygame.sprite.Group()
+
 
 
 class Person(pygame.sprite.Sprite):
@@ -105,6 +107,7 @@ class Person(pygame.sprite.Sprite):
         self.y = ped_y[direction][side]
         path = 'images/' + directionNumbers[self.direction_number] + '/HSurvivorshade.png'
         self.currentImage = pygame.image.load(path)
+        personSimulation.add(self)
     
     # a function that makes the pedestrien to move
 
@@ -593,13 +596,13 @@ class Main:
     pygame.display.set_caption("SIMULATION")
 
     # Loading signal images and font
-#     redSignal = pygame.image.load('images/signals/red.png')
-#     yellowSignal = pygame.image.load('images/signals/yellow.png')
-#     greenSignal = pygame.image.load('images/signals/green.png')
-	
+    # redSignal = pygame.image.load('images/signals/red.png')
+    # yellowSignal = pygame.image.load('images/signals/yellow.png')
+    # greenSignal = pygame.image.load('images/signals/green.png')
+
     redSignal = pygame.image.load("images/signals/red_green.png")    
     yellowSignal = pygame.image.load("images/signals/orange_red.png")    
-    greenSignal = pygame.image.load("images/signals/green_red.png") 
+    greenSignal = pygame.image.load("images/signals/green_red.png")    
 
     font = pygame.font.Font(None, 30)
 
@@ -610,14 +613,6 @@ class Main:
     thread6 = threading.Thread(name="generatePedestrian",target=generatePedestrian,args=())
     thread6.daemon = True
     thread6.start()
-
-    # person = Person(1,0)
-
-    # load one pedestrien
-    pedestrien1 = Person(1,0)
-    pedestrien2 = Person(3,0)
-    pedestrien3 = Person(2,0)
-    pedestrien4 = Person(3,1)
 
     while True:
         for event in pygame.event.get():
@@ -680,18 +675,10 @@ class Main:
             # vehicle.render(screen)
             vehicle.move()
 
-        # for person in simulation:
-        #     screen.blit(person.currentImage,[person.x,person.y])
-        #     person.move()
+        for person in personSimulation:
+            screen.blit(person.currentImage,[person.x,person.y])
+            person.move()
 
-        screen.blit(pedestrien1.currentImage,[pedestrien1.x,pedestrien1.y])
-        screen.blit(pedestrien2.currentImage,[pedestrien2.x,pedestrien2.y])
-        screen.blit(pedestrien3.currentImage,[pedestrien3.x,pedestrien3.y])
-        screen.blit(pedestrien4.currentImage,[pedestrien4.x,pedestrien4.y])
-        pedestrien1.move()
-        pedestrien2.move()
-        pedestrien3.move()
-        pedestrien4.move()
 
         pygame.display.update()
 
