@@ -67,8 +67,8 @@ vehicleTypes = {0:'car', 1:'bus', 2:'truck', 3:'rickshaw', 4:'bike'}
 directionNumbers = {0:'right', 1:'down', 2:'left', 3:'up'}
 
 # Coordinates of signal image, timer, and vehicle count
-signalCoods = [(530,230),(810,230),(810,570),(530,570)]
-signalTimerCoods = [(530,210),(810,210),(810,550),(530,550)]
+signalCoods = [(530,210),(810,210),(810,550),(530,550)]
+signalTimerCoods = [(530,190),(810,190),(810,530),(530,530)]
 vehicleCountCoods = [(480,210),(880,210),(880,550),(480,550)]
 vehicleCountTexts = ["0", "0", "0", "0"]
 
@@ -593,9 +593,14 @@ class Main:
     pygame.display.set_caption("SIMULATION")
 
     # Loading signal images and font
-    redSignal = pygame.image.load('images/signals/red.png')
-    yellowSignal = pygame.image.load('images/signals/yellow.png')
-    greenSignal = pygame.image.load('images/signals/green.png')
+#     redSignal = pygame.image.load('images/signals/red.png')
+#     yellowSignal = pygame.image.load('images/signals/yellow.png')
+#     greenSignal = pygame.image.load('images/signals/green.png')
+	
+    redSignal = pygame.image.load("images/signals/red_green.png")    
+    yellowSignal = pygame.image.load("images/signals/orange_red.png")    
+    greenSignal = pygame.image.load("images/signals/green_red.png") 
+
     font = pygame.font.Font(None, 30)
 
     thread3 = threading.Thread(name="generateVehicles",target=generateVehicles, args=())    # Generating vehicles
